@@ -2,10 +2,6 @@ parse_config:
   zmk_additional_includes:
     - "modules/zmk/helpers/include"
 
-  zmk_preamble: |
-    #include <zmk-helpers/key-labels/34.h>
-    #define CONFIG_WIRELESS
-
   raw_binding_map:
     "&sys_reset": Reset
     "&bootloader": Boot
@@ -175,7 +171,7 @@ parse_config:
 draw_config:
   append_colon_to_layer_header: false
   dark_mode: false
-  footer_text: "urob/zmk-config"
+  footer_text: "nbjames2/zmk-config-hrm"
   glyph_tap_size: 15
   glyph_hold_size: 12
   glyph_shifted_size: 10

@@ -71,7 +71,7 @@ local setup at all.
 
    ```bash
    # Replace `urob` with your username
-   git clone https://github.com/urob/zmk-config zmk-workspace
+   git clone https://github.com/nbjames2/zmk-config-hrm zmk-workspace
    ```
 
 2. Enter the workspace and set up the environment.
@@ -169,7 +169,7 @@ firmware](../README.md#pinning-the-firmware).
 To upgrade the Zephyr SDK and Python build dependencies, use `just bump-nix`. (Use with care —
 Running this will upgrade all Nix packages and may end up breaking the build environment. When in
 doubt, I recommend keeping the environment pinned to `flake.lock`, which is [continuously
-tested](https://github.com/urob/zmk-config/actions/workflows/test-build-env.yml) on Linux and
+tested](https://github.com/nbjames2/zmk-config-hrm/actions/workflows/test-build-env.yml) on Linux and
 macOS.)
 
 [^1]:

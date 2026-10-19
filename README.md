@@ -1,11 +1,12 @@
-# urob's zmk-config
+# nbjames2's zmk-config-hrm
 
-[![Firmware](https://github.com/urob/zmk-config/actions/workflows/build-nix.yml/badge.svg)](https://github.com/urob/zmk-config/actions/workflows/build-nix.yml)
-[![Environment](https://github.com/urob/zmk-config/actions/workflows/test-build-env.yml/badge.svg)](https://github.com/urob/zmk-config/actions/workflows/test-build-env.yml)
+Based on [urob/zmk-config](https://github.com/urob/zmk-config).
+
+[![Firmware](https://github.com/nbjames2/zmk-config-hrm/actions/workflows/build-nix.yml/badge.svg)](https://github.com/nbjames2/zmk-config-hrm/actions/workflows/build-nix.yml)
+[![Environment](https://github.com/nbjames2/zmk-config-hrm/actions/workflows/test-build-env.yml/badge.svg)](https://github.com/nbjames2/zmk-config-hrm/actions/workflows/test-build-env.yml)
 
 This is my personal [ZMK firmware](https://github.com/zmkfirmware/zmk/) configuration. At its core
-is a 34-key base keymap that adapts to boards of various sizes and layouts (currently a Corneish
-Zen, a Glove80 and a Planck).
+is a 58-key keymap for a Lily58 Pro (nice!nano v2), built around a 34-key Colemak-DH core.
 
 The repository doubles as the root of my ZMK workspace: a single manifest file declares the entire
 firmware — ZMK, Zephyr and every module — and pins it to exact revisions, so the config can track
@@ -48,7 +49,7 @@ firmware, and `build-user-config` takes it from there. However, the [recommended
 setup](https://zmk.dev/docs/development/local-toolchain/setup) inverts this: ZMK itself becomes the
 root of the workspace, and one adds the config and any other modules on top by hand.
 
-This repo keeps [`config/west.yml`](https://github.com/urob/zmk-config/blob/main/config/west.yml) as
+This repo keeps [`config/west.yml`](https://github.com/nbjames2/zmk-config-hrm/blob/main/config/west.yml) as
 the single source of truth for both. The west manifest declares ZMK, Zephyr and every module — each
 [pinned to an exact revision](#pinning-the-firmware) — and everything else is derived from it: `just
 init` bootstraps the workspace from the manifest, a self-installing nix environment supplies the
@@ -91,12 +92,12 @@ This repo aims for the best of both worlds using [pin-west](https://github.com/u
 dependency is pinned to an exact commit, making builds reproducible, while the config keeps tracking
 `main`.
 
-- [`config/west.yml`](https://github.com/urob/zmk-config/blob/main/config/west.yml) records each pin
+- [`config/west.yml`](https://github.com/nbjames2/zmk-config-hrm/blob/main/config/west.yml) records each pin
   together with the branch it tracks and the date it was taken — including Zephyr, which ZMK's own
   manifest would otherwise pull by branch.
 - `just bump-west` refreshes every pin to the latest revision of its tracked branch, in one command.
 - A [scheduled
-  workflow](https://github.com/urob/zmk-config/blob/main/.github/workflows/bump-west.yml) does the
+  workflow](https://github.com/nbjames2/zmk-config-hrm/blob/main/.github/workflows/bump-west.yml) does the
   same weekly and opens a PR, so updates only land once they build green.
 
 As a bonus, the manifest restricts Zephyr's imports to what ZMK actually needs, avoiding the
@@ -128,7 +129,7 @@ complete list of available recipes.
 
 See [`docs/build-env.md`](docs/build-env.md) for a setup guide and a detailed recipe reference. The
 environment itself is [continuously
-tested](https://github.com/urob/zmk-config/actions/workflows/test-build-env.yml) on Linux and macOS.
+tested](https://github.com/nbjames2/zmk-config-hrm/actions/workflows/test-build-env.yml) on Linux and macOS.
 
 ## Part II: The keymap
 
@@ -136,9 +137,9 @@ tested](https://github.com/urob/zmk-config/actions/workflows/test-build-env.yml)
 ([Click here](./draw/base.svg) for
 a breakdown by layer – powered by [keymap-drawer](https://github.com/caksoylar/keymap-drawer).)
 
-All boards share the same 34-key base keymap: each `<board>.keymap` is a small adapter that places
-the 34 shared positions onto the physical layout, padding larger boards like the Glove80 with extra
-keys.
+The keymap lives in `config/lily58.keymap` and spans all 58 keys. The 34-key core (3x5 per hand
+plus two inner thumbs) is surrounded by a number row, a sixth column per side, an inner key per
+side on the bottom letter row and two outer thumbs per side.
 
 ### Layers at a glance
 
@@ -283,7 +284,7 @@ them easy to remember. Specifically:
   mouse usage
 
 All combos are defined in
-[`config/combos.dtsi`](https://github.com/urob/zmk-config/blob/main/config/combos.dtsi).
+[`config/combos.dtsi`](https://github.com/nbjames2/zmk-config-hrm/blob/main/config/combos.dtsi).
 
 ### Smart layers
 
@@ -353,7 +354,7 @@ I am using my own implementation of a [Leader key](https://github.com/urob/zmk-l
 (activated by comboing <kbd>S</kbd> + <kbd>T</kbd>) to bind various behaviors to my layout without
 reserving dedicated keys. Currently, I am using them to bind German Umlauts, Greek letters for math
 usage, and various system commands (e.g., to toggle Bluetooth). See
-[`leader.dtsi`](https://github.com/urob/zmk-config/blob/main/config/leader.dtsi) for the full list
+[`leader.dtsi`](https://github.com/nbjames2/zmk-config-hrm/blob/main/config/leader.dtsi) for the full list
 of leader key sequences.
 
 ### Known issues and workarounds
@@ -379,12 +380,13 @@ steps:
 1. Fork the repository on GitHub or copy parts of it. GitHub disables Actions on new forks — enable
    them once from the fork's `Actions` tab if you want to [build in the
    cloud](#building-the-firmware).
-2. Adjust [`build.yaml`](https://github.com/urob/zmk-config/blob/main/build.yaml) to list your
+2. Adjust [`build.yaml`](https://github.com/nbjames2/zmk-config-hrm/blob/main/build.yaml) to list your
    boards and shields.
-3. Add a `<board>.keymap` adapter and `<board>.conf` for your keyboard —
-   [`AGENTS.md`](AGENTS.md) has the step-by-step recipe, including how to find or write the
-   key-position labels for a new board.
-4. Edit `config/base.keymap` (and `combos.dtsi`, `leader.dtsi`, `mouse.dtsi`) to taste. Features are
+3. For a board other than the Lily58, rename `config/lily58.{keymap,conf}` to the board's shield
+   name, swap the key-labels header (see
+   [zmk-helpers](https://github.com/urob/zmk-helpers/tree/main/include/zmk-helpers/key-labels))
+   and reshape each `ZMK_LAYER` grid to the board's key count.
+4. Edit `config/lily58.keymap` (and `combos.dtsi`, `leader.dtsi`, `mouse.dtsi`) to taste. Features are
    self-contained: e.g., if you don't want the leader key or the mouse layer, delete the `#include`
    and the corresponding entries in `west.yml`.
 5. [Build the firmware](#building-the-firmware) — either by pushing to GitHub and letting the cloud

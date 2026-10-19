@@ -85,9 +85,9 @@ flash expr: (build expr)
 draw: _check_yq_version
     #!/usr/bin/env bash
     set -euo pipefail
-    keymap -c "{{ draw }}/config.yaml" parse -z "{{ config }}/base.keymap" --virtual-layers Combos >"{{ draw }}/base.yaml"
+    keymap -c "{{ draw }}/config.yaml" parse -z "{{ config }}/lily58.keymap" --virtual-layers Combos >"{{ draw }}/base.yaml"
     yq -Yi '.combos.[].l = ["Combos"]' "{{ draw }}/base.yaml"
-    keymap -c "{{ draw }}/config.yaml" draw "{{ draw }}/base.yaml" -k "ferris/sweep" >"{{ draw }}/base.svg"
+    keymap -c "{{ draw }}/config.yaml" draw "{{ draw }}/base.yaml" -k "lily58" >"{{ draw }}/base.svg"
 
     jq_expr='
         def extract_label: if type == "string" then . else .t end;
@@ -111,7 +111,7 @@ draw: _check_yq_version
         .combos = [.combos[] | .l = ["Combos"]]
     '
     yq -y "$jq_expr" "{{ draw }}/base.yaml" >"{{ draw }}/overview.yaml"
-    keymap -c "{{ draw }}/config.yaml" draw "{{ draw }}/overview.yaml" -k "ferris/sweep" >"{{ draw }}/overview.svg"
+    keymap -c "{{ draw }}/config.yaml" draw "{{ draw }}/overview.yaml" -k "lily58" >"{{ draw }}/overview.svg"
     sed -i '/<text.*class="label"/d' "{{ draw }}/overview.svg"
 
 # initialize the west workspace
