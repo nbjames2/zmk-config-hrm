@@ -64,3 +64,12 @@ ZMK_COMBO(minus, &kp MINUS,    RM1 RB1,     DEF NAV NUM, COMBO_TERM_SLOW, COMBO_
 ZMK_COMBO(fslh,  &kp FSLH,     RM2 RB2,     DEF NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 ZMK_COMBO(pipe,  &kp PIPE,     RM3 RB3,     DEF NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 
+/* Cross-hand combos */
+// Hold both inner bottom keys for 1s to power off; press reset on each half to wake.
+// Peripheral would otherwise power off on press, ignoring the hold time.
+&soft_off {
+    hold-time-ms = <1000>;
+    /delete-property/ split-peripheral-off-on-press;
+};
+ZMK_COMBO(off,   &soft_off,    LB0 RB0,     DEF NAV NUM, COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+
