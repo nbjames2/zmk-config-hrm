@@ -1,0 +1,2 @@
+# Keymaps are devicetree, not C. Stop clangd/clang-format (e.g. Zed format-on-save) from touching them.
+DisableFormat: true
