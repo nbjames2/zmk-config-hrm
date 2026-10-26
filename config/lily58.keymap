@@ -210,13 +210,13 @@ ZMK_CONDITIONAL_LAYER(sys, FN NUM, SYS) // FN + NUM --> SYS.
 
 ZMK_LAYER(Base,
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                             ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-    &kp GRAVE     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5                                      &kp N6        &kp N7        &kp N8        &kp N9        &kp N0        &kp BSLH
+    &kp GRAVE     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5                                      &kp N6        &kp N7        &kp N8        &kp N9        &kp N0         &kp BSLH
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                             ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &kp TAB       &kp Q         &kp W         &kp E         &kp R         &kp T                                       &kp Y         &kp U         &kp I         &kp O         &kp P         &kp MINUS
+    &kp TAB       &kp Q         &kp W         &kp E         &kp R         &kp T                                       &kp Y         &kp U         &kp I         &kp O         &kp P          &kp MINUS
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                             ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &kp PG_UP     &hml LGUI A   &hml LALT S   &hml LSHFT D  &hml LCTRL F  &kp G                                       &kp H         &hmr LCTRL J  &hmr RSHFT K  &hmr LALT L   &hmr LGUI SEMI&kp SQT
+    &kp PG_UP     &hml LGUI A   &hml LALT S   &hml LSHFT D  &hml LCTRL F  &kp G                                       &kp H         &hmr LCTRL J  &hmr RSHFT K  &hmr LALT L   &hmr LGUI SEMI &kp SQT
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────╮ ╭─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &kp PG_DN     &kp Z         &kp X         &kp C         &kp V         &kp B         &kp LBKT        &kp RBKT      &kp N         &kp M         &kp COMMA     &kp DOT       &qexcl        &kp EQUAL
+    &kp PG_DN     &kp Z         &kp X         &kp C         &kp V         &kp B         &kp LBKT        &kp RBKT      &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH       &kp EQUAL
 //╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                               &kp HOME      &kp DEL       SMART_NUM     &lt FN RET      &lt_spc NAV 0 MAGIC_SHIFT   &bs_del       &kp END
 //                                          ╰─────────────┴─────────────┴─────────────┴─────────────╯ ╰─────────────┴─────────────┴─────────────┴─────────────╯
