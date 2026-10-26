@@ -132,17 +132,11 @@ ZMK_TRI_STATE(
     ignored-layers = <MOUSE NAV FN>;)
 
 /* Custom behaviors */
-behaviors {
-    rpi: require_prior_idle {
-        compatible = "zmk,behavior-hold-tap";
-        #binding-cells = <2>;
-        flavor = "tap-preferred";
-        tapping-term-ms = <200>;
-        quick-tap-ms = <200>;
-        require-prior-idle-ms = <125>;
-        bindings = <&kp>, <&kp>;
-    };
-};
+
+// Hold: mod | Tap: key, only after typing has paused (avoids misfires mid-word).
+ZMK_HOLD_TAP(rpi, bindings = <&kp>, <&kp>; flavor = "tap-preferred";
+             tapping-term-ms = <200>; quick-tap-ms = <200>;
+             require-prior-idle-ms = <125>;)
 
 // Alt+Tab swapper, requires tri-state module.
 ZMK_TRI_STATE(swapper, bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
@@ -191,6 +185,7 @@ ZMK_TAP_DANCE(copy_cut, bindings = <&kp LC(INS)>, <&kp LC(X)>;
 ZMK_MACRO(leader_sft, bindings = <&sk LSHFT &leader>;)
 
 // Misc aliases. [TODO: clean up]
+#define CANCEL       &kp K_CANCEL                  // Cancel caps-word & auto-layers.
 #define CLOSE_WIN    &rpi LGUI RS(Q)               // Close application
 #define MAPP_LEFT    &kp LG(LS(LEFT))              // Move application left 1 monitor
 #define MAPP_UP      &kp RG(RS(UP))                // Move application up 1 monitor
@@ -231,11 +226,11 @@ ZMK_LAYER(Nav,
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                             ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
     &kp ESC       ___           ___           ___           ___           ___                                         ___           ___           ___           ___           ___           ___
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                             ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    ___ &rpi LGUI RS(Q) &kp LG(LS(LEFT)) &kp RG(RS(UP)) &kp RG(RS(DOWN)) &kp RG(RS(RIGHT))                            &kp PG_UP     NAV_BSPC      NAV_UP        NAV_DEL       ___           ___
+    ___           CLOSE_WIN     MAPP_LEFT     MAPP_UP       MAPP_DOWN     MAPP_RIGHT                                  &kp PG_UP     NAV_BSPC      NAV_UP        NAV_DEL       ___           ___
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                             ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    ___  ___  &rpi LGUI RG(RC(RS(LEFT)))&rpi LALT RG(RC(RS(UP)))&rpi LSHIFT RG(RC(RS(DOWN)))&rpi LSHIFT RG(RC(RS(RIGHT)))                              &kp PG_DN     NAV_LEFT      NAV_DOWN      NAV_RIGHT     &kp RET       ___
+    ___           ___           MWKSP_LEFT    MWKSP_UP      MWKSP_DOWN    MWKSP_RIGHT                                 &kp PG_DN     NAV_LEFT      NAV_DOWN      NAV_RIGHT     &kp RET       ___
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────╮ ╭─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    ___           ___           &kp LG(LEFT)  &kp LG(UP)    &kp RG(DOWN)  &kp LG(RIGHT) ___             ___           &kp INS       &kp TAB       ___           ___           ___           ___
+    ___           ___           PREV_COL      PREV_WKSP     NEXT_WKSP     NEXT_COL      ___             ___           &kp INS       &kp TAB       ___           ___           ___           ___
 //╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
                                               ___           ___           ___           ___             ___           CANCEL        ___           ___
 //                                          ╰─────────────┴─────────────┴─────────────┴─────────────╯ ╰─────────────┴─────────────┴─────────────┴─────────────╯
@@ -245,7 +240,7 @@ ZMK_LAYER(Fn,
 //╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                             ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
     &kp F1        &kp F2        &kp F3        &kp F4        &kp F5        &kp F6                                      &kp F7        &kp F8        &kp F9        &kp F10       &kp F11       &kp F12
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                             ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &kp C_PREV    &kp C_PLAY_PAUSE&kp C_NEXT    &kp C_VOL_DN  &kp C_MUTE    &kp C_VOL_UP                                ___           ___           ___           ___           ___           ___
+    &kp C_PREV    &kp C_PLAY_PAUSE &kp C_NEXT  &kp C_VOL_DN  &kp C_MUTE    &kp C_VOL_UP                                ___           ___           ___           ___           ___           ___
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                             ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     ___           ___           ___           ___           ___           ___                                         ___           ___           ___           ___           ___           ___
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────╮ ╭─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
