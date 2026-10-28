@@ -54,6 +54,7 @@ which shifts every combo and HRM trigger up one row.
 | Leader sequences                  | `config/leader.dtsi`                                              |
 | Mouse layer                       | `config/mouse.dtsi`                                               |
 | Board settings (BT, sleep, mouse) | `config/lily58.conf`                                              |
+| OLED widgets and animations       | `config/lily58.conf` (`CONFIG_NICE_OLED_*`), `nice_oled` shield in `build.yaml` |
 | Build targets                     | `build.yaml`                                                      |
 | ZMK/module versions               | `config/west.yml` (via `pin-west bump` only)                      |
 | Dev environment                   | `flake.nix`, `nix/` (test with `nix develop`)                     |

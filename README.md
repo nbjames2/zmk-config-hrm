@@ -371,6 +371,10 @@ implementations in QMK). Below are a few remaining issues:
   (eg changing active mods).
 - Very minor: `&bootloader` doesn't work with stm32 boards like the Planck
   ([#1086](https://github.com/zmkfirmware/zmk/issues/1086))
+- The OLED widgets come from [zmk-nice-oled](https://github.com/mctechnology17/zmk-nice-oled),
+  whose upstream only supports ZMK v0.3.0 (LVGL 8). Until its ZMK main / LVGL 9 port
+  ([#37](https://github.com/mctechnology17/zmk-nice-oled/pull/37)) is merged, the manifest pins
+  the [tokyo2006 fork](https://github.com/tokyo2006/zmk-nice-oled/tree/4.0).
 
 ## Part III: Adapting this config
 

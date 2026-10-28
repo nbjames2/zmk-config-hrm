@@ -27,6 +27,9 @@ manifest:
       url-base: https://github.com/urob
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    # zmk-nice-oled port to ZMK main / LVGL 9 (mctechnology17/zmk-nice-oled PR #37)
+    - name: tokyo2006
+      url-base: https://github.com/tokyo2006
 
   projects:
     - name: zmk
@@ -53,6 +56,10 @@ manifest:
     - name: zmk-unicode
       path: modules/zmk/unicode
       revision: 5f458b6f1fd8ca83f4aba793c2a64916522507e9 # main (2026-08-31)
+    - name: zmk-nice-oled
+      remote: tokyo2006
+      path: modules/zmk/nice-oled
+      revision: de5b2afbd05f1a136e31ca28659373cd07d1e443 # 4.0 (2026-08-15)
 
     # Avoid downloading GBs of unused Zephyr modules. Remove this section to
     # restore the default (needed for less common hardware).
