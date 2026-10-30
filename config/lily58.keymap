@@ -138,8 +138,8 @@ ZMK_HOLD_TAP(rpi, bindings = <&kp>, <&kp>; flavor = "tap-preferred";
              tapping-term-ms = <200>; quick-tap-ms = <200>;
              require-prior-idle-ms = <125>;)
 
-// Tap: nothing (safe against accidental presses) | Hold: key.
-ZMK_HOLD_TAP(hold_only, bindings = <&kp>, <&none>; flavor = "tap-preferred";
+// Tap: key | Hold: key, only after the full tapping term (interrupts stay taps).
+ZMK_HOLD_TAP(long_hold, bindings = <&kp>, <&kp>; flavor = "tap-preferred";
              tapping-term-ms = <250>;)
 
 // Tap: next workspace | Hold: super.
@@ -213,7 +213,7 @@ ZMK_MACRO(leader_sft, bindings = <&sk LSHFT &leader>;)
 #define NEXT_COL     &kp LG(RIGHT)                 // Move application right 1 columnn on same monitor
 #define SCRSHOT      &kp RG(RS(PRINTSCREEN))       // Take a system screenshot
 #define LAUNCHER     &kp LG(SPACE)                 // Toggle app launcher
-#define CLIP_HIST    &hold_only LG(V) 0            // Hold: clipboard history
+#define CLIP_HIST    &long_hold LG(V) LS(LC(C))    // Tap: terminal copy | Hold: clipboard history
 #define SUPER_WS     &super_thumb LGUI LG(TAB)     // Tap: next workspace | Hold: super
 
 &soft_off {
@@ -230,11 +230,11 @@ ZMK_LAYER(Base,
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                             ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &kp TAB       &kp Q         &kp W         &kp E         &kp R         &kp T                                       &kp Y         &kp U         &kp I         &kp O         &kp P          &kp MINUS
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                             ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    LAUNCHER      &hml LALT A   &hml LGUI S   &hml LCTRL D  &hml LSHFT F  &kp G                                       &kp H         &hmr RSHFT J  &hmr RCTRL K  &hmr RGUI L   &hmr RALT SEMI &kp SQT
+    SUPER_WS      &hml LALT A   &hml LGUI S   &hml LCTRL D  &hml LSHFT F  &kp G                                       &kp H         &hmr RSHFT J  &hmr RCTRL K  &hmr RGUI L   &hmr RALT SEMI &kp SQT
 //├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────╮ ╭─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    CLIP_HIST     &kp Z        &kp X         &kp C         &kp V         &kp B         &kp LBKT        &kp RBKT      &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH       &kp EQUAL
+    LAUNCHER     &kp Z         &kp X         &kp C         &kp V         &kp B         &kp LBKT        &kp RBKT      &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH       &kp EQUAL
 //╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                              COPY_CUT      SMART_NUM     &kp DEL       &lt FN RET      &lt_spc NAV 0 &bs_del       MAGIC_SHIFT     SUPER_WS
+                                              COPY_CUT      SMART_NUM     &kp DEL       &lt FN RET      &lt_spc NAV 0 &bs_del       MAGIC_SHIFT    CLIP_HIST
 //                                          ╰─────────────┴─────────────┴─────────────┴─────────────╯ ╰─────────────┴─────────────┴─────────────┴─────────────╯
 )
 
